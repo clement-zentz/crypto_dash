@@ -1,0 +1,46 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# --- Virtual env ---
+venv/
+.env/
+.env.*
+*.env
+
+# --- Base de données locale ---
+*.db
+*.sqlite3
+
+# --- Alembic ---
+# alembic/versions/*.py  # <- optionnel : ignore les migrations si tu ne veux pas les versionner
+# (Perso, je te recommande DE NE PAS l'ignorer si ton projet est collaboratif)
+
+# --- IDE / Éditeurs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS spécifiques ---
+.DS_Store
+Thumbs.db
+
+# --- Docker ---
+*.pid
+*.sock
+
+# --- Tests ---
+htmlcov/
+.coverage
+.pytest_cache/
+
+# --- FastAPI / Uvicorn ---
+*.pid
+
+# --- ignored folder ---
+ignore
