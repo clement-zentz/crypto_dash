@@ -6,7 +6,7 @@ ___
 ## 🛠️ Tech Stack
 * Backend: FastAPI, PostgreSQL
 * frontend: NextJs, TypeScript, Tailwind
-* DevOps: Docker, docker-compose, Git
+<!-- * DevOps: Docker, docker-compose, Git -->
 ___
 
 ## 🚀 Features: (Not yet implemented)
