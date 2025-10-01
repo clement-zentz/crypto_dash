@@ -1,8 +1,8 @@
 # backend/main.py
 from fastapi import FastAPI
-from api.routes import router
-from db.database import Base, engine
-from core.config import settings
+from .api.routes import router
+from .db.database import Base, engine
+from .core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
 
 # landing page

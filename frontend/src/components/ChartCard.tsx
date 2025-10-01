@@ -16,7 +16,11 @@ export default function ChartCard({ title, data }: ChartCardProps) {
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={data}>
                         <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis />
+                        <XAxis dataKey="date" tickFormatter={(value: string) => {
+                            // value attendu: "2025-10-01"
+                            const d = new Date(value);
+                            return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "short" }); // ex: "oct. 25"
+                        }}/>
                         <YAxis />
                         <Tooltip />
                         <Line type="monotone" dataKey="value" stroke="#3b82f6" strokeWidth={2} />

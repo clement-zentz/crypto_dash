@@ -8,7 +8,7 @@ import ChartCard from "@/components/ChartCard";
 export default function DashboardPage() {
     const { data, isLoading, error } = useQuery({
         queryKey: ["crypto"],
-        queryFn: fetchCryptoData,
+        queryFn: () => fetchCryptoData(7),
     });
 
 
@@ -17,7 +17,7 @@ export default function DashboardPage() {
 
 
     return (
-        <div className="grid grid-col-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ChartCard title="Bitcoin Price (USD)" data={data?.bitcoin} />
             <ChartCard title="Ethereum Price (USD)" data={data?.ethereum} />
         </div>

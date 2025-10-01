@@ -2,20 +2,37 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from db import models
-from db.database import get_db
-from schemas.crypto import CryptoDashboardResponse
+from backend.db import models
+from backend.db.database import get_db
+from backend.schemas.crypto import CryptoDashboardResponse
+from backend.services.coingecko import fetch_multiple, upsert_prices
 
 router = APIRouter()
 
 @router.get("/crypto/", response_model=CryptoDashboardResponse)
-def get_crypto(
+async def get_crypto(
     symbol: Optional[str] = None, 
+    refresh: bool = False,
+    days: int = 7,
     db : Session = Depends(get_db)
 ):
     """
     Return time-series price data for BTC and ETH (or a single symbol if provided).
     """
+    # Rafraîchir si demandé ou si base vide
+    if refresh or db.query(models.CryptoPrice).count() == 0:
+        pairs = []
+        if symbol:
+            s = symbol.upper()
+            if s == "BTC":
+                pairs.append(("bitcoin", "BTC"))
+            elif s == "ETH":
+                pairs.append(("ethereum", "ETH"))
+        else:
+            pairs = [("bitcoin", "BTC"), ("ethereum", "ETH")]
+        data = await fetch_multiple(pairs, days=days)
+        upsert_prices(db, data)
+
     query = db.query(models.CryptoPrice)
     if symbol:
         symbol = symbol.upper()

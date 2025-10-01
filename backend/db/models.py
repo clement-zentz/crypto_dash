@@ -1,6 +1,6 @@
 # backend/db/models.py
 from sqlalchemy import Column, Integer, String, Float, Date
-from db.database import Base
+from backend.db.database import Base
 
 class CryptoPrice(Base):
     __tablename__ = "crypto_prices"
